@@ -1,0 +1,33 @@
+// Override Bootstrap default variables for a dark theme.
+// These variables must be defined before importing Bootstrap so they take effect.
+
+$body-bg: #2c2c2c !default;
+$body-color: #ffffff !default;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+
+$link-color: #4da3ff !default;
+$link-hover-color: lighten($link-color, 10%) !default;
+
+// Navbar dark theme overrides
+$navbar-dark-bg: #1c1c1c !default;
+$navbar-dark-color: #ffffff !default;
+$navbar-dark-hover-color: #cccccc !default;
+
+// Button primary overrides
+$btn-primary-bg: #4a4a4a !default;
+$btn-primary-border: #4a4a4a !default;
+$btn-primary-hover-bg: #5a5a5a !default;
+$btn-primary-hover-border: #5a5a5a !default;
+
+
+
+// Import Bootstrap's core functionality so that the overrides take effect.
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+// Finally, import all of Bootstrap.
+@import "bootstrap";
+

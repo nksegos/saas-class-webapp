@@ -6,6 +6,7 @@ if gem list --no-installed --exact --silent foreman; then
 fi
 
 # Default to port 3000 if not specified
+export BINDING="0.0.0.0"
 export PORT="${PORT:-3000}"
 
 exec foreman start -f Procfile.dev --env /dev/null "$@"

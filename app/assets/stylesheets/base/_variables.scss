@@ -1,4 +1,18 @@
-$body-bg: #2c2c2c;
-$body-color: #ffffff;
-$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$body-bg: #2c2c2c !default;
+$body-color: #ffffff !default;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
 
+$link-color: #4da3ff !default;
+$link-hover-color: darken($link-color, 10%) !default;
+
+// Navbar dark theme overrides
+$navbar-dark-bg: #1c1c1c !default;
+$navbar-dark-color: #ffffff !default;
+$navbar-dark-hover-color: #cccccc !default;
+
+// Button primary overrides
+$primary: #4a4a4a !default;
+$btn-primary-bg: #4a4a4a !default;
+$btn-primary-border: #4a4a4a !default;
+$btn-primary-hover-bg: #5a5a5a !default;
+$btn-primary-hover-border: #5a5a5a !default;
