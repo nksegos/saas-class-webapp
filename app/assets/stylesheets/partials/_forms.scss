@@ -1,0 +1,30 @@
+.form-container {
+  background-color: #3c3c3c;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem auto;
+  max-width: 600px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #555;
+  border: none;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+.form-input:focus {
+  background-color: #666;
+}
+
