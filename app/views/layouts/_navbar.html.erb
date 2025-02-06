@@ -17,12 +17,24 @@
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Login", root_path, class: "nav-link" %>
+            <span class="nav-link">Welcome, <%= current_user.name %></span>
           </li>
           <li class="nav-item">
-            <%= link_to "Sign Up", root_path, class: "nav-link" %>
+            <%= link_to "New Post", root_path, class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete}, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", login_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign Up", signup_path, class: "nav-link" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
