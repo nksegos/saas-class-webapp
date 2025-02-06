@@ -1,0 +1,12 @@
+<h1 class="page-title">Posts in <%= @category.name %></h1>
+<div class="posts">
+  <% @posts.each do |post| %>
+    <article class="post">
+      <h2>
+        <%= link_to post.title, post, class: "link" %>
+      </h2>
+      <p class="post-meta">by <%= post.user.name %></p>
+    </article>
+  <% end %>
+</div>
+<%= link_to "Back to Categories", categories_path, class: "button" %>
