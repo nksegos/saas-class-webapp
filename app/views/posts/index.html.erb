@@ -1,5 +1,14 @@
 <h1 class="page-title">All Posts</h1>
 
+<div class="container mt-4">
+  <%= form_with url: posts_path, method: :get, local: true, class: "mb-4" do |form| %>
+    <div class="input-group">
+      <%= form.text_field :search, value: params[:search], class: "form-control", placeholder: "Search posts by title or description..." %>
+      <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+  <% end %>
+</div>
+
 <div class="posts">
   <% @posts.each do |post| %>
     <article class="post">

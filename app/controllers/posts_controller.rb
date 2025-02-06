@@ -4,8 +4,12 @@ class PostsController < ApplicationController
   before_action :set_and_authorize_post, only: [:edit, :update, :destroy]
 
   def index
-    # List all posts
-    @posts = Post.all.order(created_at: :desc)
+    if params[:search].present?
+      search_query = "%#{params[:search]}%"
+      @posts = Post.where("title LIKE ? OR content LIKE ?", search_query, search_query).order(created_at: :desc)
+    else
+      @posts = Post.all.order(created_at: :desc)
+    end
   end
 
   def show
@@ -16,7 +20,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    # Associate post with the current user
     @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to @post, notice: "Post was successfully created."
@@ -26,7 +29,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    # Optionally check that current_user is the owner
   end
 
   def update
