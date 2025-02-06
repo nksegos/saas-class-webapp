@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_and_authorize_post, only: [:edit, :update, :destroy]
 
   def index
     # List all posts
@@ -50,4 +52,13 @@ class PostsController < ApplicationController
     # Permit title, content, and choose an existing category
     params.require(:post).permit(:title, :content, :category_id)
   end
+
+  def set_and_authorize_post
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to root_path
+    end
+  end
+
 end
