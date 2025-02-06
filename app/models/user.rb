@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
+  has_many :contacts, dependent: :destroy
+  has_many :conversation_users, dependent: :destroy
+  has_many :conversations, through: :conversation_users
 
   validates :name, presence: true
   validates :name, uniqueness: true

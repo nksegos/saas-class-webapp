@@ -1,0 +1,26 @@
+<div class="modal fade" id="conversationModal-<%= conversation.id %>" tabindex="-1" aria-labelledby="conversationModalLabel-<%= conversation.id %>" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="conversationModalLabel-<%= conversation.id %>">
+          Conversation with <%= conversation.users.reject{ |u| u == current_user }.map(&:email).join(", ") %>
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="messages-<%= conversation.id %>">
+          <%= render partial: "messages/message", collection: conversation.messages.order(created_at: :asc), as: :message %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= form_with(model: [conversation, Message.new], remote: true, html: { id: "new_message_#{conversation.id}" }) do |f| %>
+          <div class="input-group w-100">
+            <%= f.text_field :body, placeholder: "Type a message...", class: "form-control" %>
+            <button class="btn btn-primary" type="submit">Send</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
