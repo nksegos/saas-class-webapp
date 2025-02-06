@@ -5,7 +5,7 @@
   <ul class="list-group list-group-flush">
     <% current_user.contacts.each do |contact| %>
       <li class="list-group-item bg-dark">
-        <%= link_to contact.contact.email, conversations_path(user_ids: [contact.contact.id]), remote: true, class: "text-white contact-link" %>
+        <%= link_to contact.contact.name, conversations_path(user_ids: [contact.contact.id]), remote: true, class: "text-white contact-link" %>
       </li>
     <% end %>
   </ul>

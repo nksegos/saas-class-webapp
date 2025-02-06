@@ -3,7 +3,7 @@
   <% @conversations.each do |conversation| %>
     <div class="mb-3">
       <% participants = conversation.users.reject { |u| u == current_user } %>
-      <strong>With:</strong> <%= participants.map(&:email).join(", ") %>
+      <strong>With:</strong> <%= participants.map(&:name).join(", ") %>
       <!-- Trigger modal -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#conversationModal-<%= conversation.id %>">
         Open Chat

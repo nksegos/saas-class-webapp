@@ -9,12 +9,11 @@
       <ul class="list-group list-group-flush">
         <% @contacts.each do |contact_record| %>
           <li class="list-group-item bg-dark d-flex justify-content-between align-items-center">
-            <%= contact_record.contact.email %>
+            <%= contact_record.contact.name %>
             <div>
-              <!-- Button to initiate conversation -->
               <%= button_to "Message", conversations_path(user_ids: [contact_record.contact.id]), 
-                  method: :post, class: "btn btn-primary btn-sm" %>
-              <!-- Optional: Remove contact button -->
+                method: :post, class: "btn btn-primary btn-sm" %>
+              <br>
               <%= button_to "Remove", contact_path(contact_record), method: :delete, 
                   data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm ms-2" %>
             </div>
@@ -33,7 +32,7 @@
       <ul class="list-group list-group-flush">
         <% @potential_contacts.each do |user| %>
           <li class="list-group-item bg-dark d-flex justify-content-between align-items-center">
-            <%= user.email %>
+            <%= user.name %>
             <%= button_to "Add as Contact", contacts_path(contact_id: user.id), method: :post, 
                 class: "btn btn-secondary btn-sm" %>
           </li>
