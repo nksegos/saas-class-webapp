@@ -7,18 +7,17 @@
       </h5>
     </div>
     <div class="card-body">
+      <%= turbo_stream_from @conversation, "messages" %>
       <div id="messages" data-conversation-id="<%= @conversation.id %>">
         <%= render partial: "messages/message", collection: @conversation.messages.order(created_at: :asc), as: :message %>
       </div>
     </div>
-    <div class="card-footer">
-      <%= form_with(model: [@conversation, Message.new], remote: true) do |f| %>
+      <%= form_with(model: [@conversation, Message.new], data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset"}) do |f| %>
         <div class="input-group">
-          <%= f.text_field :body, placeholder: "Type a message...", class: "form-control" %>
+          <%= f.text_field :body, placeholder: "Type a message...", class: "form-control", autocomplete: "off" %>
           <button class="btn btn-primary" type="submit">Send</button>
         </div>
       <% end %>
-    </div>
   </div>
 </div>
 

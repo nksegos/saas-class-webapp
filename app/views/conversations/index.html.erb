@@ -1,16 +1,48 @@
 <div class="container mt-4">
-  <h1 class="page-title">Your Conversations</h1>
+  <h1 class="page-title">Your Active Conversations</h1>
   <% @conversations.each do |conversation| %>
-    <div class="mb-3">
-      <% participants = conversation.users.reject { |u| u == current_user } %>
-      <strong>With:</strong> <%= participants.map(&:name).join(", ") %>
-      <!-- Trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#conversationModal-<%= conversation.id %>">
-        Open Chat
-      </button>
-      <!-- Render the conversation modal -->
-      <%= render partial: "conversations/conversation_modal", locals: { conversation: conversation } %>
-    </div>
+    <% participants = (conversation.users.reject { |u| u == current_user }).map(&:name).join(", ") %>
+    <article class="post">
+    <% if conversation.conversation_type == 'group' %>Group: <% else %>Private: <% end %>   
+    <%= link_to "Chat with: #{participants}", conversation, class: "link", :target => '_blank' %>
+    </article>
   <% end %>
+  </div>
 </div>
-
+<hr>
+  <div class="card bg-dark text-white mb-4">
+  <div class="card-header">
+    <h3>Start New Conversation</h3>
+  </div>
+  <div class="card-body">
+    <%= form_with url: conversations_path, method: :post, local: true do |f| %>
+      <div class="mb-3">
+        <%= label_tag :user_ids, "Select contact:" %>
+        <%= select_tag "user_ids[]",
+              options_from_collection_for_select(current_user.contacts.map(&:contact), "id", "name"),
+              multiple: false,
+              class: "form-control" %>
+      </div>
+      <%= f.submit "Start Conversation", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<hr>
+<div class="card bg-dark text-white mb-4">
+  <div class="card-header">
+    <h3>Create Group Conversation</h3>
+  </div>
+  <div class="card-body">
+    <%= form_with url: conversations_path, method: :post, local: true do |f| %>
+      <div class="mb-3">
+        <%= label_tag :user_ids, "Select participants:" %>
+        <!-- Multi-select list only from current user's contacts -->
+        <%= select_tag "user_ids[]",
+              options_from_collection_for_select(current_user.contacts.map(&:contact), "id", "name"),
+              multiple: true,
+              class: "form-control" %>
+      </div>
+      <%= f.submit "Create Group Conversation", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

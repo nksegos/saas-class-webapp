@@ -374,6 +374,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  actioncable
   bootsnap
   bootstrap_form
   brakeman

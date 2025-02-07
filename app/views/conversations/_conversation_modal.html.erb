@@ -8,14 +8,15 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div id="messages-<%= conversation.id %>">
+        <%= turbo_stream_from @conversation, "messages" %>
+        <div id="messages">
           <%= render partial: "messages/message", collection: conversation.messages.order(created_at: :asc), as: :message %>
         </div>
       </div>
       <div class="modal-footer">
-        <%= form_with(model: [conversation, Message.new], remote: true, html: { id: "new_message_#{conversation.id}" }) do |f| %>
+        <%= form_with(model: [conversation, Message.new], data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset"}, html: { id: "new_message_#{conversation.id}" }) do |f| %>
           <div class="input-group w-100">
-            <%= f.text_field :body, placeholder: "Type a message...", class: "form-control" %>
+            <%= f.text_field :body, placeholder: "Type a message...", class: "form-control", autocomplete: "off" %>
             <button class="btn btn-primary" type="submit">Send</button>
           </div>
         <% end %>
