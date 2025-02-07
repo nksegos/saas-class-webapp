@@ -23,7 +23,7 @@
               multiple: false,
               class: "form-control" %>
       </div>
-      <%= f.submit "Start Conversation", class: "btn btn-primary" %>
+      <%= f.submit "Start Conversation", class: "btn btn-primary", :formtarget => "_blank" %>
     <% end %>
   </div>
 </div>
@@ -36,13 +36,12 @@
     <%= form_with url: conversations_path, method: :post, local: true do |f| %>
       <div class="mb-3">
         <%= label_tag :user_ids, "Select participants:" %>
-        <!-- Multi-select list only from current user's contacts -->
         <%= select_tag "user_ids[]",
               options_from_collection_for_select(current_user.contacts.map(&:contact), "id", "name"),
               multiple: true,
               class: "form-control" %>
       </div>
-      <%= f.submit "Create Group Conversation", class: "btn btn-primary" %>
+      <%= f.submit "Create Group Conversation", class: "btn btn-primary", :formtarget => "_blank" %>
     <% end %>
   </div>
 </div>
