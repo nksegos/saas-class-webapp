@@ -25,6 +25,9 @@
               <%= f.submit "Log in", class: "btn btn-primary" %>
             </div>
           <% end %>
+          <div class="mt-4">
+          <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-danger" %>
+          </div>
         </div>
       </div>
     </div>
